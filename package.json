@@ -1,7 +1,7 @@
 {
   "name": "nodejs-global-program-2021",
   "version": "1.0.0",
-  "description": "### Description Cross-country global mentoring program which aims at improving corresponding skills related to **Node.js** ecosystem and connected environment, giving a strong base of skill set required to have for a production-ready engineer.",
+  "description": "Cross-country global mentoring program NodeJS 2021",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
