@@ -12,7 +12,7 @@ pipeline(
   fs.createWriteStream(resultPath),
   err => {
     if (err) {
-      console.error(`Pipeline failed: `, err);
+      console.error('Pipeline failed: ', err);
     } else {
       console.info('Pipeline succeeded!');
     }
