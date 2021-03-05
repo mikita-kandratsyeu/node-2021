@@ -14,7 +14,7 @@ pipeline(
     if (err) {
       console.error(`Pipeline failed: `, err);
     } else {
-      console.info('Pipeline succeeded!')
+      console.info('Pipeline succeeded!');
     }
   }
 );
