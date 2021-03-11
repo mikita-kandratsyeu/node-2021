@@ -18,7 +18,21 @@
   ],
   "rules": {
     "no-debugger": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
     "no-console": 0,
-    "prettier/prettier": ["error"]
+    "prettier/prettier": [
+      "error"
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".ts"
+        ]
+      }
+    }
   }
 }

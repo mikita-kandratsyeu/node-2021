@@ -1,12 +1,18 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Application } from 'express';
+import bodyParser from 'body-parser';
+import { routerUsers } from './routes';
 
-const app = express();
+const app: Application = express();
 const port: number | string = process.env.PORT || 5000;
 
-app.get('/', (req: Request, res: Response) => {
+app.use(bodyParser.json());
+
+app.use('/api/users', routerUsers);
+
+app.get('/', (req: Request, res: Response): void => {
   res.send('Application working correctly with a TypeScript!');
 });
 
-app.listen(port, () => {
-  console.info(`Server running on http://localhost:${port}`);
+app.listen(port, (): void => {
+  console.info(`Server running on port: http://localhost:${port}`);
 });
