@@ -6,6 +6,10 @@ import { pipeline } from 'stream';
 const filePath = path.resolve('csv', 'input.csv');
 const resultPath = path.resolve('output', 'output.txt');
 
+fs.mkdir('output', { recursive: true }, (err) => {
+  if (err) throw err;
+});
+
 pipeline(
   fs.createReadStream(filePath, { encoding: 'utf-8' }),
   csv(),
