@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { v4 as uuid } from 'uuid';
 import { usersMock } from '../mock';
 import { sortByLogin } from '../services';
-import { IUser } from '../mock/interfaces';
+import { IUser } from '../data-models/User/interfaces';
 
 const users: IUser[] = [...usersMock];
 
@@ -22,7 +22,7 @@ export const getUserById = (req: Request, res: Response, next: NextFunction): vo
       message: 'User does not exist!',
     });
 
-    next(new Error('User does not exist!'));
+    next();
   }
 };
 
@@ -40,7 +40,7 @@ export const getAutoSuggestUser = (req: Request, res: Response, next: NextFuncti
       message: 'User does not exist!',
     });
 
-    next(new Error('User does not exist!'));
+    next();
   }
 };
 
@@ -58,7 +58,7 @@ export const createUser = (req: Request, res: Response, next: NextFunction): voi
       message: 'User does not exist!',
     });
 
-    next(new Error('User does not exist!'));
+    next();
   }
 };
 
@@ -83,7 +83,7 @@ export const updateUser = (req: Request, res: Response, next: NextFunction): voi
       message: 'User does not exist!',
     });
 
-    next(new Error('User does not exist!'));
+    next();
   }
 };
 
@@ -101,6 +101,6 @@ export const deleteUser = (req: Request, res: Response, next: NextFunction): voi
       message: 'User does not exist!',
     });
 
-    next(new Error('User does not exist!'));
+    next();
   }
 };

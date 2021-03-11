@@ -1,4 +1,4 @@
-import { IUser } from '../mock/interfaces';
+import { IUser } from '../data-models/User/interfaces';
 
 export const sortByLogin = (users: IUser[]) =>
   users.sort((a: IUser, b: IUser): number => {
