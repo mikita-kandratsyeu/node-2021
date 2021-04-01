@@ -6,7 +6,7 @@ import { IUser } from '../data-models/User/interfaces';
 
 const users: IUser[] = [...usersMock];
 
-export const getUsers = (req: Request, res: Response): void => {
+export const getUsers = (req: Request, res: Response, next: NextFunction): void => {
   const { loginSubstring } = req.query;
   const { limit } = req.query;
 
@@ -22,6 +22,8 @@ export const getUsers = (req: Request, res: Response): void => {
     }
   } else {
     res.status(200).json(users.filter(user => !user.isDeleted));
+
+    next();
   }
 };
 
