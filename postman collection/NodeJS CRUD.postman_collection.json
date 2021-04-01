@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e4b72af2-9f6b-427a-99c2-b83e6445a993",
+		"_postman_id": "5f28fd88-e2b3-4e7d-b5db-efd92bfc2e85",
 		"name": "NodeJS CRUD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -68,7 +68,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/users/Tester/5",
+					"raw": "http://localhost:8080/api/users/?loginSubstring=test&limit=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -77,8 +77,17 @@
 					"path": [
 						"api",
 						"users",
-						"Tester",
-						"5"
+						""
+					],
+					"query": [
+						{
+							"key": "loginSubstring",
+							"value": "test"
+						},
+						{
+							"key": "limit",
+							"value": "5"
+						}
 					]
 				}
 			},
@@ -91,7 +100,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"login\": \"superlogin\",\r\n  \"password\": \"Qwerty123\",\r\n  \"age\": 23,\r\n  \"isDeleted\": false\r\n}",
+					"raw": "{\r\n  \"login\": \"superlogin3\",\r\n  \"password\": \"Qwerty123\",\r\n  \"age\": 23,\r\n  \"isDeleted\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -116,11 +125,11 @@
 		{
 			"name": "updateUser",
 			"request": {
-				"method": "PATCH",
+				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"login\": \"superlogin123\",\r\n  \"password\": \"Qwerty123\",\r\n  \"age\": 23,\r\n  \"isDeleted\": false\r\n}",
+					"raw": "{\r\n  \"id\": \"23\",\r\n  \"login\": \"superlogin123\",\r\n  \"password\": \"Qwerty1233232\",\r\n  \"age\": 120,\r\n  \"isDeleted\": false\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
