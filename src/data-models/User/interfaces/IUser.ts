@@ -4,4 +4,6 @@ export interface IUser {
   password: string;
   age: number;
   isDeleted: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }

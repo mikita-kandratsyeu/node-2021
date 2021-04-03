@@ -1,1 +1,1 @@
-export * from './fill-user-db';
+export * from './fill-users-db';

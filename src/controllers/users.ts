@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { v4 as uuid } from 'uuid';
 import { usersMock } from '../mock';
 import { sortByLogin } from '../services';
-import { IUser } from '../data-models/User/interfaces';
+import { IUser } from '../data-models/User';
 
 const users: IUser[] = [...usersMock];
 
@@ -126,11 +126,9 @@ export const deleteUser = (
   const { userId } = req.params;
 
   if (userId) {
-    const user = users.find(item => item.id === userId);
+    users.find(item => item.id === userId).isDeleted = true;
 
-    user.isDeleted = true;
-
-    res.status(200).send(user);
+    res.status(204).send();
   } else {
     res.status(404).json({
       message: 'User does not exist!',

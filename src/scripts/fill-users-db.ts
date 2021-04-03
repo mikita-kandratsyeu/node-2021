@@ -1,6 +1,7 @@
 import { sequelize } from '../data-access';
 import { IUser, userSchema } from '../data-models/User';
 import { usersMock } from '../mock';
+import { usersModel } from '../constants';
 
 const users: IUser[] = [...usersMock];
 
@@ -12,6 +13,6 @@ const usersDefinition = async () => {
 
 usersDefinition()
   .then(() => {
-    console.info('Table with users was created!');
+    console.info(`Model: ${usersModel} was created!`);
   })
   .catch(err => console.error(err));

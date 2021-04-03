@@ -1,8 +1,9 @@
 import DataTypes from 'sequelize';
 import { sequelize } from '../../../data-access';
+import { usersModel } from '../../../constants';
 
 export const userSchema = sequelize.define(
-  'Users',
+  usersModel,
   {
     id: {
       primaryKey: true,
