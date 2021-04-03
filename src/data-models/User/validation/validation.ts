@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import { user } from '.';
 
 export const validation = {
-  addUserValidation: async (req: Request, res: Response, next: NextFunction) => {
+  addUserValidation: async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     const value = await user.validate(req.body);
 
     if (value.error) {

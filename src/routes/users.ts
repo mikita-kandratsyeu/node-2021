@@ -1,6 +1,12 @@
 import express, { Router } from 'express';
-import { createUser, deleteUser, getUsers, getUserById, updateUser } from '../controllers';
-import { validation } from '../data-models/User/validation';
+import {
+  createUser,
+  deleteUser,
+  getUsers,
+  getUserById,
+  updateUser,
+} from '../controllers';
+import { validation } from '../data-models/User';
 
 const routerUsers: Router = express.Router();
 const { addUserValidation } = validation;

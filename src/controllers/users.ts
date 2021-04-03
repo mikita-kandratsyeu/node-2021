@@ -6,12 +6,18 @@ import { IUser } from '../data-models/User/interfaces';
 
 const users: IUser[] = [...usersMock];
 
-export const getUsers = (req: Request, res: Response, next: NextFunction): void => {
+export const getUsers = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const { loginSubstring } = req.query;
   const { limit } = req.query;
 
   if (loginSubstring) {
-    const filteredUsers: IUser[] | undefined = sortByLogin([...users]).filter(user =>
+    const filteredUsers: IUser[] | undefined = sortByLogin([
+      ...users,
+    ]).filter(user =>
       user.login.toLowerCase().includes(String(loginSubstring).toLowerCase()),
     );
 
@@ -27,7 +33,11 @@ export const getUsers = (req: Request, res: Response, next: NextFunction): void 
   }
 };
 
-export const getUserById = (req: Request, res: Response, next: NextFunction): void => {
+export const getUserById = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const { userId } = req.params;
 
   const findUser: IUser | undefined = users.find(user => user.id === userId);
@@ -43,7 +53,11 @@ export const getUserById = (req: Request, res: Response, next: NextFunction): vo
   }
 };
 
-export const createUser = (req: Request, res: Response, next: NextFunction): void => {
+export const createUser = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const user: IUser | undefined = req.body;
 
   if (user) {
@@ -67,7 +81,11 @@ export const createUser = (req: Request, res: Response, next: NextFunction): voi
   }
 };
 
-export const updateUser = (req: Request, res: Response, next: NextFunction): void => {
+export const updateUser = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const { userId } = req.params;
   const { id, login, password, age, isDeleted } = req.body;
 
@@ -100,7 +118,11 @@ export const updateUser = (req: Request, res: Response, next: NextFunction): voi
   }
 };
 
-export const deleteUser = (req: Request, res: Response, next: NextFunction): void => {
+export const deleteUser = (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+): void => {
   const { userId } = req.params;
 
   if (userId) {
