@@ -1,6 +1,7 @@
 {
   "name": "nodejs-global-program-2021",
   "version": "1.0.0",
+  "description": "Cross-country global mentoring program NodeJS 2021",
   "main": "dist/app.js",
   "scripts": {
     "start": "tsc && cross-env PORT=5000 node dist/app.js",
