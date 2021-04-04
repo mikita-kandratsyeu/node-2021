@@ -1,9 +1,11 @@
+import { Model } from 'sequelize';
+
 export interface IUser {
   id: string;
   login: string;
   password: string;
   age: number;
   isDeleted: boolean;
-  createdAt?: string;
-  updatedAt?: string;
 }
+
+export interface IUserInstance extends Model, IUser {}

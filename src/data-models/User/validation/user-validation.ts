@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
-import { user } from '.';
+import { userSchemaJoi } from '.';
 
-export const validation = {
+export const userValidation = {
   addUserValidation: async (
     req: Request,
     res: Response,
     next: NextFunction,
   ) => {
-    const value = await user.validate(req.body);
+    const value = await userSchemaJoi.validate(req.body);
 
     if (value.error) {
       res.status(400).json({

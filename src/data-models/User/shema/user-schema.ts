@@ -1,8 +1,9 @@
 import DataTypes from 'sequelize';
 import { sequelize } from '../../../data-access';
 import { usersModel } from '../../../constants';
+import { IUserInstance } from '../interfaces';
 
-export const userSchema = sequelize.define(
+export const userSchema = sequelize.define<IUserInstance>(
   usersModel,
   {
     id: {
@@ -42,5 +43,6 @@ export const userSchema = sequelize.define(
   },
   {
     freezeTableName: true,
+    timestamps: false,
   },
 );

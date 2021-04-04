@@ -1,2 +1,2 @@
-export * from './user';
-export * from './validation';
+export * from './user-schema-joi';
+export * from './user-validation';

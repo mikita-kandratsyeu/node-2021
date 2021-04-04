@@ -1,1 +1,1 @@
-export { default as usersMock } from './users';
+export { default as usersMock } from './users-mock';

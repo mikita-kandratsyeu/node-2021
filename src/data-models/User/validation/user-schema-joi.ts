@@ -1,6 +1,6 @@
 import joi from 'joi';
 
-export const user = joi.object({
+export const userSchemaJoi = joi.object({
   id: joi.string(),
   login: joi.string().required(),
   password: joi

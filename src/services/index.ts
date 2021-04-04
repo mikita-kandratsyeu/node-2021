@@ -1,2 +1,2 @@
 export * from './services';
-export * from './user-service';
+export * from './users-db-service';
