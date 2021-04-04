@@ -15,7 +15,7 @@ export class UsersDbService {
 
   getUserById = async (id: string) => userSchema.findByPk(id);
 
-  getAutoSuggestUser = (loginSubstring: string, limit?: number) =>
+  getAutoSuggestUser = async (loginSubstring: string, limit?: number) =>
     userSchema.findAll({
       where: {
         isDeleted: false,
