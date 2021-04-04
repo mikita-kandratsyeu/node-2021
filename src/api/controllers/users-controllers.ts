@@ -25,7 +25,7 @@ export const getUsers = async (
 
     if (loginSubstring) {
       if (limit) {
-        const filteredUsers: IUser[] = await usersDbService.getAutoSuggestUser(
+        const filteredUsers = await usersDbService.getAutoSuggestUser(
           String(loginSubstring),
           +limit,
         );
@@ -33,7 +33,7 @@ export const getUsers = async (
         return res.status(200).json(filteredUsers);
       }
 
-      const filteredUsers: IUser[] = await usersDbService.getAutoSuggestUser(
+      const filteredUsers = await usersDbService.getAutoSuggestUser(
         String(loginSubstring),
       );
 
@@ -60,7 +60,7 @@ export const getUserById = async (
   try {
     const { userId } = req.params;
 
-    const findUser: IUser | null = await usersDbService.getUserById(userId);
+    const findUser = await usersDbService.getUserById(userId);
 
     if (findUser) {
       return res.status(200).json(findUser);
@@ -95,7 +95,7 @@ export const createUser = async (
         });
       }
 
-      const newUser: IUser = await usersDbService.createUser({
+      const newUser = await usersDbService.createUser({
         id: uuid(),
         ...user,
       });
@@ -124,7 +124,7 @@ export const updateUser = async (
     const { userId } = req.params;
     const { id } = req.body;
 
-    const findUser: IUser | null = await usersDbService.getUserById(id);
+    const findUser = await usersDbService.getUserById(id);
 
     if (findUser) {
       if (id && id !== userId) {
@@ -160,7 +160,7 @@ export const deleteUser = async (
   try {
     const { userId } = req.params;
 
-    const findUser: IUser | null = await usersDbService.getUserById(userId);
+    const findUser = await usersDbService.getUserById(userId);
 
     if (userId && findUser) {
       await usersDbService.deleteUserById(userId);
