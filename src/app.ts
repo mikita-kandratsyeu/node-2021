@@ -1,4 +1,6 @@
 import express, { Request, Response, Application } from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { routerUsers } from './api';
 import { sequelize } from './data-access';
@@ -8,7 +10,11 @@ import { notFoundMessage, startServerMessage } from './constants';
 const app: Application = express();
 const port: number | string = process.env.PORT || 5000;
 
+app.use(morgan('dev'));
+
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.use('/api/users', routerUsers);
 
