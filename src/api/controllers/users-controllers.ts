@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
 import { UsersDbService } from '../../services';
 import { IUser } from '../../data-models';
@@ -12,16 +12,10 @@ import {
 
 const usersDbService = new UsersDbService();
 
-export const getUsers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getUsers = async (req: Request, res: Response) => {
   try {
     const { loginSubstring } = req.query;
     const { limit } = req.query;
-
-    console.log(loginSubstring, limit);
 
     if (loginSubstring) {
       if (limit) {
@@ -47,16 +41,10 @@ export const getUsers = async (
     return res.status(500).json({
       message: errorMessage,
     });
-  } finally {
-    next();
   }
 };
 
-export const getUserById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const getUserById = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -73,16 +61,10 @@ export const getUserById = async (
     return res.status(500).json({
       message: errorMessage,
     });
-  } finally {
-    next();
   }
 };
 
-export const createUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const createUser = async (req: Request, res: Response) => {
   try {
     const user: IUser | undefined = req.body;
 
@@ -110,16 +92,10 @@ export const createUser = async (
     return res.status(500).json({
       message: errorMessage,
     });
-  } finally {
-    next();
   }
 };
 
-export const updateUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const updateUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
     const { id } = req.body;
@@ -147,16 +123,10 @@ export const updateUser = async (
     return res.status(500).json({
       message: errorMessage,
     });
-  } finally {
-    next();
   }
 };
 
-export const deleteUser = async (
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) => {
+export const deleteUser = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
 
@@ -175,7 +145,5 @@ export const deleteUser = async (
     return res.status(500).json({
       message: errorMessage,
     });
-  } finally {
-    next();
   }
 };
