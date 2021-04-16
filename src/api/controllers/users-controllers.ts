@@ -124,7 +124,7 @@ export const updateUser = async (
     const { userId } = req.params;
     const { id } = req.body;
 
-    const findUser = await usersDbService.getUserById(id);
+    const findUser = await usersDbService.getUserById(userId);
 
     if (findUser) {
       if (id && id !== userId) {

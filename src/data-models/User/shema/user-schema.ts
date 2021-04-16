@@ -28,7 +28,7 @@ export const userSchema = sequelize.define<IUserInstance>(
     },
 
     age: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         min: 4,
