@@ -1,6 +1,7 @@
 export const usersDefaultLimit: number = 100;
 
 export const usersModel: string = 'Users';
+export const groupsModel: string = 'Groups';
 export const notFoundMessage: string = 'Sorry cant find that!';
 export const errorMessage: string = 'Something went wrong!';
 export const specifiedLoginMessage: string =
