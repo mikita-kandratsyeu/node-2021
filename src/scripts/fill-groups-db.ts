@@ -1,6 +1,6 @@
 import { sequelize } from '../data-access';
-import { groupsMock } from '../mock';
 import { groupSchema } from '../data-models';
+import { groupsMock } from '../mock';
 import { createModelMessage, groupsModel } from '../constants';
 
 const groupsDefinition = async () => {

@@ -1,7 +1,7 @@
 import DataTypes from 'sequelize';
-import { sequelize } from '../../../data-access';
-import { IGroupInstance } from '../interfaces';
-import { groupsModel } from '../../../constants';
+import { sequelize } from '../data-access';
+import { IGroupInstance } from '../types';
+import { groupsModel } from '../constants';
 
 export const groupSchema = sequelize.define<IGroupInstance>(
   groupsModel,

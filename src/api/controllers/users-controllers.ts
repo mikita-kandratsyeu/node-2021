@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
 import { UsersDbService } from '../../services';
-import { IUser } from '../../data-models';
+import { IUser } from '../../types';
 import {
   errorMessage,
   notFoundMessage,
@@ -40,6 +40,7 @@ export const getUsers = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err,
     });
   }
 };
@@ -60,6 +61,7 @@ export const getUserById = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err,
     });
   }
 };
@@ -86,11 +88,12 @@ export const createUser = async (req: Request, res: Response) => {
     }
 
     return res.status(404).json({
-      message: errorMessage,
+      message: notFoundMessage,
     });
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err,
     });
   }
 };
@@ -122,6 +125,7 @@ export const updateUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err,
     });
   }
 };
@@ -144,6 +148,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err,
     });
   }
 };

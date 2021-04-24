@@ -1,4 +1,4 @@
-import { IUser } from '../data-models';
+import { IUser } from '../types';
 
 export const sortByLogin = (users: IUser[]) =>
   users.sort((a: IUser, b: IUser): number => {

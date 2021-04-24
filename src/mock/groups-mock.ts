@@ -1,4 +1,4 @@
-import { IGroup } from '../data-models';
+import { IGroup } from '../types';
 
 const groupsMock: IGroup[] = [
   {

@@ -1,5 +1,6 @@
 import { Op } from 'sequelize';
-import { IUser, userSchema } from '../data-models';
+import { userSchema } from '../data-models';
+import { IUser } from '../types';
 import { usersDefaultLimit } from '../constants';
 
 export class UsersDbService {
