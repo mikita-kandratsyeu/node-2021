@@ -40,7 +40,7 @@ export const getUsers = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -61,7 +61,7 @@ export const getUserById = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -93,7 +93,7 @@ export const createUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -125,7 +125,7 @@ export const updateUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -148,7 +148,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };

@@ -26,7 +26,7 @@ export const getGroups = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -47,7 +47,7 @@ export const getGroupById = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -77,9 +77,10 @@ export const createGroup = async (req: Request, res: Response) => {
       message: notFoundMessage,
     });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -111,7 +112,7 @@ export const updateGroup = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
@@ -134,7 +135,7 @@ export const deleteGroup = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
-      error: err,
+      error: err.message,
     });
   }
 };
