@@ -159,6 +159,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getUserWithGroup",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/10/with-group",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"10",
+								"with-group"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -213,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Students\",\r\n  \"permissions\": [\"READ\"]\r\n}",
+							"raw": "{\r\n  \"name\": \"Students\",\r\n  \"permissions\": [\"READ\", \"WRITE\"]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,6 +303,37 @@
 								"api",
 								"groups",
 								"4a09adb7-a56e-479f-9919-bcc84a4c50ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addUsersToGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userIds\": [\"10\", \"4\", \"5\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/groups/222/add-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"groups",
+								"222",
+								"add-users"
 							]
 						}
 					},

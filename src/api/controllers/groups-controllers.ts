@@ -7,6 +7,7 @@ import {
   notFoundMessage,
   specifiedNameMessage,
   updateGroupMessage,
+  addUsersToGroupMessage,
 } from '../../constants';
 import { IGroup } from '../../types';
 
@@ -93,7 +94,9 @@ export const addUsersToGroup = async (req: Request, res: Response) => {
     if (groupId && userIds) {
       await groupsDbService.addUsersToGroup(groupId, userIds);
 
-      return res.status(200).json();
+      return res.status(200).json({
+        message: addUsersToGroupMessage(groupId, userIds),
+      });
     }
 
     return res.status(404).json({

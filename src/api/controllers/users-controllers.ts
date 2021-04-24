@@ -73,7 +73,7 @@ export const getUserWithGroup = async (req: Request, res: Response) => {
     const findUserWithGroup = await usersDbService.getUsersWithGroup(userId);
 
     if (findUserWithGroup) {
-      res.status(200).json(findUserWithGroup);
+      return res.status(200).json(findUserWithGroup);
     }
 
     return res.status(404).json({
