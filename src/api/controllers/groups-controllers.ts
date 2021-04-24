@@ -85,6 +85,28 @@ export const createGroup = async (req: Request, res: Response) => {
   }
 };
 
+export const addUsersToGroup = async (req: Request, res: Response) => {
+  try {
+    const { groupId } = req.params;
+    const { userIds } = req.body;
+
+    if (groupId && userIds) {
+      await groupsDbService.addUsersToGroup(groupId, userIds);
+
+      return res.status(200).json();
+    }
+
+    return res.status(404).json({
+      message: notFoundMessage,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: errorMessage,
+      error: err.message,
+    });
+  }
+};
+
 export const updateGroup = async (req: Request, res: Response) => {
   try {
     const { groupId } = req.params;

@@ -4,6 +4,7 @@ export const usersDefaultLimit: number = 100;
 // Model names
 export const usersModel: string = 'Users';
 export const groupsModel: string = 'Groups';
+export const userGroupModel: string = 'UserGroup';
 
 // Server response messages
 export const notFoundMessage: string = 'Sorry cant find that!';

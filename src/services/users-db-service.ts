@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { userSchema } from '../data-models';
+import { groupSchema, userSchema } from '../data-models';
 import { IUser } from '../types';
 import { usersDefaultLimit } from '../constants';
 
@@ -54,6 +54,15 @@ export class UsersDbService {
     userSchema.findOne({
       where: {
         login,
+      },
+    });
+
+  getUsersWithGroup = async (userId: string) =>
+    userSchema.findByPk(userId, {
+      include: {
+        model: groupSchema,
+        attributes: ['id', 'name', 'permissions'],
+        through: { attributes: [] },
       },
     });
 }

@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { routerUsers, routerGroups } from './api';
 import { sequelize } from './data-access';
-import { groupSchema, userSchema } from './data-models';
+import { groupSchema, userSchema, userGroupSchema } from './data-models';
 import { notFoundMessage, startServerMessage } from './constants';
 
 const app: Application = express();
@@ -30,10 +30,21 @@ const startServer = async () => {
   await sequelize.authenticate();
   await userSchema.sync();
   await groupSchema.sync();
+  await userGroupSchema.sync();
 };
 
 startServer()
   .then(() => {
+    userSchema.belongsToMany(groupSchema, {
+      through: userGroupSchema,
+      foreignKey: 'userId',
+    });
+
+    groupSchema.belongsToMany(userSchema, {
+      through: userGroupSchema,
+      foreignKey: 'groupId',
+    });
+
     app.listen(port, () => {
       console.info(startServerMessage(port));
     });

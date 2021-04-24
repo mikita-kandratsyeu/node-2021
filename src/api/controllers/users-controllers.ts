@@ -66,6 +66,27 @@ export const getUserById = async (req: Request, res: Response) => {
   }
 };
 
+export const getUserWithGroup = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+
+    const findUserWithGroup = await usersDbService.getUsersWithGroup(userId);
+
+    if (findUserWithGroup) {
+      res.status(200).json(findUserWithGroup);
+    }
+
+    return res.status(404).json({
+      message: notFoundMessage,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: errorMessage,
+      error: err.message,
+    });
+  }
+};
+
 export const createUser = async (req: Request, res: Response) => {
   try {
     const user: IUser | undefined = req.body;
