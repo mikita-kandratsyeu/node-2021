@@ -38,4 +38,4 @@ startServer()
       console.info(startServerMessage(port));
     });
   })
-  .catch(err => console.info(err));
+  .catch(err => console.error(err));

@@ -3,8 +3,10 @@ import { v4 as uuid } from 'uuid';
 import { GroupsDbService } from '../../services';
 import {
   errorMessage,
+  groupIdErrorMessage,
   notFoundMessage,
   specifiedNameMessage,
+  updateGroupMessage,
 } from '../../constants';
 import { IGroup } from '../../types';
 
@@ -84,7 +86,51 @@ export const createGroup = async (req: Request, res: Response) => {
 
 export const updateGroup = async (req: Request, res: Response) => {
   try {
-    // TODO: Add functionality
+    const { groupId } = req.params;
+    const { id } = req.body;
+
+    const findGroup = await groupsDbService.getGroupById(groupId);
+
+    if (findGroup) {
+      if (id && id !== groupId) {
+        return res.status(400).json({
+          message: groupIdErrorMessage,
+        });
+      }
+
+      await groupsDbService.updateGroup(findGroup, req.body);
+
+      return res.status(200).json({
+        message: updateGroupMessage(groupId),
+      });
+    }
+
+    return res.status(404).json({
+      message: notFoundMessage,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: errorMessage,
+      error: err,
+    });
+  }
+};
+
+export const deleteGroup = async (req: Request, res: Response) => {
+  try {
+    const { groupId } = req.params;
+
+    const findGroup = await groupsDbService.getGroupById(groupId);
+
+    if (groupId && findGroup) {
+      await groupsDbService.deleteGroup(findGroup);
+
+      return res.status(204).send();
+    }
+
+    return res.status(404).json({
+      message: notFoundMessage,
+    });
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,

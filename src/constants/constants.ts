@@ -13,10 +13,13 @@ export const specifiedLoginMessage: string =
 export const specifiedNameMessage: string =
   'The name you specified is busy! Try again!';
 export const userIdErrorMessage: string = "User's id cannot be changed!";
+export const groupIdErrorMessage: string = "Group's id cannot be changed!";
 
 // Generate different messages
 export const updateUserMessage = (userId: string): string =>
   `User with the id: ${userId} has been updated!`;
+export const updateGroupMessage = (groupId: string): string =>
+  `Group with the id: ${groupId} has been updated!`;
 export const startServerMessage = (port: number | string): string =>
   `Server running on port: http://localhost:${port}`;
 export const createModelMessage = (nameOfModel: string): string =>
