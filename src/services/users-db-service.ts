@@ -23,7 +23,7 @@ export class UsersDbService {
         login: { [Op.iLike]: `%${loginSubstring}%` },
       },
       order: [['login', 'ASC']],
-      limit: limit && usersDefaultLimit,
+      limit: limit || usersDefaultLimit,
     });
 
   createUser = async (user: IUser) => userSchema.create(user);

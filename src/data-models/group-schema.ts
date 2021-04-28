@@ -16,10 +16,12 @@ export const groupSchema = sequelize.define<IGroupInstance>(
       validate: {
         isAlphanumeric: true,
       },
+      onDelete: 'cascade',
     },
     permissions: {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
+      onDelete: 'cascade',
     },
   },
   {

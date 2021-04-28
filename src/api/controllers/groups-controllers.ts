@@ -126,8 +126,11 @@ export const updateGroup = async (req: Request, res: Response) => {
 
       await groupsDbService.updateGroup(findGroup, req.body);
 
+      const updatedGroup = await groupsDbService.getGroupById(groupId);
+
       return res.status(200).json({
         message: updateGroupMessage(groupId),
+        updatedGroup,
       });
     }
 
