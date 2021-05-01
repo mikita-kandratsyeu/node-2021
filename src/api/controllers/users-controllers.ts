@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { v4 as uuid } from 'uuid';
 import { UsersDbService } from '../../services';
-import { IUser } from '../../data-models';
+import { IUser } from '../../types';
 import {
   errorMessage,
   notFoundMessage,
@@ -14,8 +14,7 @@ const usersDbService = new UsersDbService();
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
-    const { loginSubstring } = req.query;
-    const { limit } = req.query;
+    const { loginSubstring, limit } = req.query;
 
     if (loginSubstring) {
       if (limit) {
@@ -40,6 +39,7 @@ export const getUsers = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err.message,
     });
   }
 };
@@ -47,8 +47,11 @@ export const getUsers = async (req: Request, res: Response) => {
 export const getUserById = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
+    const { withGroups } = req.query;
 
-    const findUser = await usersDbService.getUserById(userId);
+    const findUser = withGroups
+      ? await usersDbService.getUsersWithGroup(userId)
+      : await usersDbService.getUserById(userId);
 
     if (findUser) {
       return res.status(200).json(findUser);
@@ -60,6 +63,7 @@ export const getUserById = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err.message,
     });
   }
 };
@@ -86,11 +90,12 @@ export const createUser = async (req: Request, res: Response) => {
     }
 
     return res.status(404).json({
-      message: errorMessage,
+      message: notFoundMessage,
     });
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err.message,
     });
   }
 };
@@ -122,6 +127,7 @@ export const updateUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err.message,
     });
   }
 };
@@ -144,6 +150,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (err) {
     return res.status(500).json({
       message: errorMessage,
+      error: err.message,
     });
   }
 };

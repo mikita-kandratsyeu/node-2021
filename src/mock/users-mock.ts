@@ -1,4 +1,4 @@
-import { IUser } from '../data-models';
+import { IUser } from '../types';
 
 const usersMock: IUser[] = [
   {

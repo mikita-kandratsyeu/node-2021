@@ -1,5 +1,6 @@
 import { Op } from 'sequelize';
-import { IUser, userSchema } from '../data-models';
+import { groupSchema, userSchema } from '../data-models';
+import { IUser } from '../types';
 import { usersDefaultLimit } from '../constants';
 
 export class UsersDbService {
@@ -22,7 +23,7 @@ export class UsersDbService {
         login: { [Op.iLike]: `%${loginSubstring}%` },
       },
       order: [['login', 'ASC']],
-      limit: limit && usersDefaultLimit,
+      limit: limit || usersDefaultLimit,
     });
 
   createUser = async (user: IUser) => userSchema.create(user);
@@ -53,6 +54,15 @@ export class UsersDbService {
     userSchema.findOne({
       where: {
         login,
+      },
+    });
+
+  getUsersWithGroup = async (userId: string) =>
+    userSchema.findByPk(userId, {
+      include: {
+        model: groupSchema,
+        attributes: ['id', 'name', 'permissions'],
+        through: { attributes: [] },
       },
     });
 }

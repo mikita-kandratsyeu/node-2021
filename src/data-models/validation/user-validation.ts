@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { userSchemaJoi } from '.';
+import { userSchemaJoi } from '../index';
 
 export const userValidation = {
   addUserValidation: async (
