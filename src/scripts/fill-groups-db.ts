@@ -2,6 +2,7 @@ import { sequelize } from '../data-access';
 import { groupSchema } from '../data-models';
 import { groupsMock } from '../mock';
 import { createModelMessage, groupsModel } from '../constants';
+import { Logger } from '../../config';
 
 const groupsDefinition = async () => {
   await sequelize.authenticate();
@@ -11,6 +12,6 @@ const groupsDefinition = async () => {
 
 groupsDefinition()
   .then(() => {
-    console.info(createModelMessage(groupsModel));
+    Logger.info(createModelMessage(groupsModel));
   })
-  .catch(err => console.error(err));
+  .catch(err => Logger.error(err));

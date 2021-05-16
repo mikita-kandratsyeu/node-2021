@@ -2,6 +2,7 @@ import { sequelize } from '../data-access';
 import { userSchema } from '../data-models';
 import { usersMock } from '../mock';
 import { usersModel, createModelMessage } from '../constants';
+import { Logger } from '../../config';
 
 const usersDefinition = async () => {
   await sequelize.authenticate();
@@ -11,6 +12,6 @@ const usersDefinition = async () => {
 
 usersDefinition()
   .then(() => {
-    console.info(createModelMessage(usersModel));
+    Logger.info(createModelMessage(usersModel));
   })
-  .catch(err => console.error(err));
+  .catch(err => Logger.error(err));

@@ -1,16 +1,16 @@
 import express, { Request, Response, Application } from 'express';
 import cors from 'cors';
-import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import { routerUsers, routerGroups } from './api';
 import { sequelize } from './data-access';
 import { groupSchema, userSchema, userGroupSchema } from './data-models';
 import { notFoundMessage, startServerMessage } from './constants';
+import { Logger, morganMiddleware } from '../config';
 
 const app: Application = express();
 const port: number | string = process.env.PORT || 5000;
 
-app.use(morgan('dev'));
+app.use(morganMiddleware);
 
 app.use(bodyParser.json());
 
@@ -25,6 +25,15 @@ app.use((req: Request, res: Response): void => {
     message: notFoundMessage,
   });
 });
+
+process
+  .on('unhandledRejection', (reason, p) => {
+    Logger.error(`${reason} Unhandled Rejection at Promise ${p}`);
+  })
+  .on('uncaughtException', err => {
+    Logger.error(`${err} Uncaught Exception thrown`);
+    process.exit(1);
+  });
 
 const startServer = async () => {
   await sequelize.authenticate();
@@ -46,7 +55,7 @@ startServer()
     });
 
     app.listen(port, () => {
-      console.info(startServerMessage(port));
+      Logger.debug(startServerMessage(port));
     });
   })
-  .catch(err => console.error(err));
+  .catch(err => Logger.error(err));
