@@ -21,8 +21,10 @@ export const updateUserMessage = (userId: string): string =>
   `User with the id: ${userId} has been updated!`;
 export const updateGroupMessage = (groupId: string): string =>
   `Group with the id: ${groupId} has been updated!`;
-export const startServerMessage = (port: number | string): string =>
-  `Server running on port: http://localhost:${port}`;
+export const startServerMessage = (
+  port: number | string,
+  hostname: string,
+): string => `Server running on port: ${hostname}:${port}`;
 export const createModelMessage = (nameOfModel: string): string =>
   `Model: ${nameOfModel} was created!`;
 export const addUsersToGroupMessage = (

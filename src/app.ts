@@ -55,7 +55,7 @@ startServer()
     });
 
     app.listen(port, () => {
-      Logger.debug(startServerMessage(port));
+      Logger.debug(startServerMessage(port, process.env.HOST));
     });
   })
   .catch(err => Logger.error(err));
