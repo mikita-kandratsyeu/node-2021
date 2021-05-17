@@ -1,4 +1,4 @@
-import express, { Request, Response, Application } from 'express';
+import express, { Request, Response, Application, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { routerUsers, routerGroups } from './api';
@@ -23,6 +23,14 @@ app.use('/api/groups', routerGroups);
 app.use((req: Request, res: Response): void => {
   res.status(404).json({
     message: notFoundMessage,
+  });
+});
+
+// eslint-disable-next-line no-unused-vars
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  res.status(500).json({
+    message: err.message,
+    stack: err.stack,
   });
 });
 
