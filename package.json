@@ -37,6 +37,7 @@
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
     "joi": "^17.4.0",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",

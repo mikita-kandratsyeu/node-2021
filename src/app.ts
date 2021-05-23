@@ -10,11 +10,11 @@ import { Logger, morganMiddleware } from '../config';
 const app: Application = express();
 const port: number | string = process.env.PORT || 5000;
 
+app.use(cors());
+
 app.use(morganMiddleware);
 
 app.use(bodyParser.json());
-
-app.use(cors());
 
 app.use('/api/users', routerUsers);
 
@@ -28,6 +28,12 @@ app.use((req: Request, res: Response): void => {
 
 // eslint-disable-next-line no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  Logger.error(
+    `Method: ${req.method} / Arguments: ${JSON.stringify(req.query)} / Error: ${
+      err.message
+    }`,
+  );
+
   res.status(500).json({
     message: err.message,
     stack: err.stack,
@@ -63,7 +69,7 @@ startServer()
     });
 
     app.listen(port, () => {
-      Logger.debug(startServerMessage(port, process.env.HOST));
+      Logger.debug(startServerMessage(port, process.env.HOST_NAME));
     });
   })
   .catch(err => Logger.error(err));
