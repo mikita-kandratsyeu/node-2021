@@ -78,7 +78,6 @@ export const createGroup = async (req: Request, res: Response) => {
       message: notFoundMessage,
     });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       message: errorMessage,
       error: err.message,
