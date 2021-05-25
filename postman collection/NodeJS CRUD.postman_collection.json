@@ -328,7 +328,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/groups/35498964-52a4-4eda-ade1-e66e689b5534/add-users",
+							"raw": "http://localhost:8080/api/groups/115c2b60-9d32-4eab-9d20-d7215192b63a/add-users",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -337,8 +337,74 @@
 							"path": [
 								"api",
 								"groups",
-								"35498964-52a4-4eda-ade1-e66e689b5534",
+								"115c2b60-9d32-4eab-9d20-d7215192b63a",
 								"add-users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login into system",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"login\": \"ATester4nikita\",\n    \"password\": \"12345\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQiLCJsb2dpbiI6IkFUZXN0ZXI0bmlraXRhIiwiaWF0IjoxNjIxOTc3Nzg2LCJleHAiOjE2MjE5ODEzODZ9.b3bmdeGotgtO8AcSc0c3zY2mw_WZaWIecZRnJeUKZ58",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/auth/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"refresh-token"
 							]
 						}
 					},

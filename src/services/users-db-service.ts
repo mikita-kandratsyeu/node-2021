@@ -65,4 +65,9 @@ export class UsersDbService {
         through: { attributes: [] },
       },
     });
+
+  findUserByCredential = async (login: string, password: string) =>
+    userSchema.findOne({
+      where: { login, password },
+    });
 }
