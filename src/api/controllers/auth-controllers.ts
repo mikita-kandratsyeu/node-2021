@@ -4,7 +4,6 @@ import {
   errorMessage,
   forbiddenError,
   incorrectPasswordOrLogin,
-  notFoundMessage,
 } from '../../constants';
 import { IUserToken } from '../../types';
 
@@ -49,8 +48,9 @@ export const refreshToken = async (req: Request, res: Response) => {
       });
     }
 
-    return res.status(404).json({
-      message: notFoundMessage,
+    return res.status(403).json({
+      message: forbiddenError,
+      error: incorrectPasswordOrLogin,
     });
   } catch (err) {
     return res.status(500).json({
