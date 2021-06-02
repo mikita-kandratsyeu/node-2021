@@ -1,18 +1,16 @@
 import express, { Router } from 'express';
 import asyncHandler from 'express-async-handler';
 import { loginIntoSystem, refreshToken } from '..';
-import { TokenService } from '../../services';
 import { authValidation } from '../../data-models';
+import { checkTokenRefresh } from '../../middlewares';
 
 const routerAuth: Router = express.Router();
 const { addAuthValidation } = authValidation;
 
-const tokenService = new TokenService();
-
 routerAuth.post('/login', addAuthValidation, asyncHandler(loginIntoSystem));
 routerAuth.post(
   '/refresh-token',
-  tokenService.checkTokenAccess,
+  checkTokenRefresh,
   asyncHandler(refreshToken),
 );
 
