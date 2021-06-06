@@ -8,6 +8,7 @@ import {
   specifiedNameMessage,
   updateGroupMessage,
   addUsersToGroupMessage,
+  statusCode,
 } from '../../constants';
 import { IGroup } from '../../types';
 
@@ -18,14 +19,14 @@ export const getGroups = async (req: Request, res: Response) => {
     const groups = await groupsDbService.getAllGroups();
 
     if (groups) {
-      return res.status(200).json(groups);
+      return res.status(statusCode.OK).json(groups);
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -39,14 +40,14 @@ export const getGroupById = async (req: Request, res: Response) => {
     const findGroup = await groupsDbService.getGroupById(groupId);
 
     if (findGroup) {
-      return res.status(200).json(findGroup);
+      return res.status(statusCode.OK).json(findGroup);
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -61,7 +62,7 @@ export const createGroup = async (req: Request, res: Response) => {
       const checkName = await groupsDbService.checkNameExist(group.name);
 
       if (checkName) {
-        return res.status(400).json({
+        return res.status(statusCode.BAD_REQUEST).json({
           message: specifiedNameMessage,
         });
       }
@@ -71,14 +72,14 @@ export const createGroup = async (req: Request, res: Response) => {
         ...group,
       });
 
-      return res.status(200).json(newGroup);
+      return res.status(statusCode.OK).json(newGroup);
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -93,16 +94,16 @@ export const addUsersToGroup = async (req: Request, res: Response) => {
     if (groupId && userIds) {
       await groupsDbService.addUsersToGroup(groupId, userIds);
 
-      return res.status(200).json({
+      return res.status(statusCode.OK).json({
         message: addUsersToGroupMessage(groupId, userIds),
       });
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -118,7 +119,7 @@ export const updateGroup = async (req: Request, res: Response) => {
 
     if (findGroup) {
       if (id && id !== groupId) {
-        return res.status(400).json({
+        return res.status(statusCode.BAD_REQUEST).json({
           message: groupIdErrorMessage,
         });
       }
@@ -127,17 +128,17 @@ export const updateGroup = async (req: Request, res: Response) => {
 
       const updatedGroup = await groupsDbService.getGroupById(groupId);
 
-      return res.status(200).json({
+      return res.status(statusCode.OK).json({
         message: updateGroupMessage(groupId),
         updatedGroup,
       });
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -153,14 +154,14 @@ export const deleteGroup = async (req: Request, res: Response) => {
     if (groupId && findGroup) {
       await groupsDbService.deleteGroup(findGroup);
 
-      return res.status(204).send();
+      return res.status(statusCode.NO_CONTENT).send();
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });

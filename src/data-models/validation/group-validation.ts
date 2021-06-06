@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { groupSchemaJoi, addUsersToGroupSchemaJoi } from '..';
+import { statusCode } from '../../constants';
 
 export const groupValidation = {
   addGroupValidation: async (
@@ -10,7 +11,7 @@ export const groupValidation = {
     const value = await groupSchemaJoi.validate(req.body);
 
     if (value.error) {
-      res.status(400).json({
+      res.status(statusCode.BAD_REQUEST).json({
         message: value.error.details[0].message,
       });
     } else {
@@ -26,7 +27,7 @@ export const groupValidation = {
     const value = await addUsersToGroupSchemaJoi.validate(req.body);
 
     if (value.error) {
-      res.status(400).json({
+      res.status(statusCode.BAD_REQUEST).json({
         message: value.error.details[0].message,
       });
     } else {

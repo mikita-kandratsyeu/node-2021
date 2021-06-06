@@ -6,6 +6,7 @@ import {
   errorMessage,
   notFoundMessage,
   specifiedLoginMessage,
+  statusCode,
   updateUserMessage,
   userIdErrorMessage,
 } from '../../constants';
@@ -23,21 +24,21 @@ export const getUsers = async (req: Request, res: Response) => {
           +limit,
         );
 
-        return res.status(200).json(filteredUsers);
+        return res.status(statusCode.OK).json(filteredUsers);
       }
 
       const filteredUsers = await usersDbService.getAutoSuggestUser(
         String(loginSubstring),
       );
 
-      return res.status(200).json(filteredUsers);
+      return res.status(statusCode.OK).json(filteredUsers);
     }
 
     const users = await usersDbService.getAllUsers();
 
-    return res.status(200).json(users);
+    return res.status(statusCode.OK).json(users);
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -54,14 +55,14 @@ export const getUserById = async (req: Request, res: Response) => {
       : await usersDbService.getUserById(userId);
 
     if (findUser) {
-      return res.status(200).json(findUser);
+      return res.status(statusCode.OK).json(findUser);
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -76,7 +77,7 @@ export const createUser = async (req: Request, res: Response) => {
       const checkLogin = await usersDbService.checkLoginExist(user.login);
 
       if (checkLogin) {
-        return res.status(400).json({
+        return res.status(statusCode.BAD_REQUEST).json({
           message: specifiedLoginMessage,
         });
       }
@@ -86,14 +87,14 @@ export const createUser = async (req: Request, res: Response) => {
         ...user,
       });
 
-      return res.status(200).json(newUser);
+      return res.status(statusCode.OK).json(newUser);
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -109,23 +110,23 @@ export const updateUser = async (req: Request, res: Response) => {
 
     if (findUser) {
       if (id && id !== userId) {
-        return res.status(400).json({
+        return res.status(statusCode.BAD_REQUEST).json({
           message: userIdErrorMessage,
         });
       }
 
       await usersDbService.updateUser(findUser, req.body);
 
-      return res.status(200).json({
+      return res.status(statusCode.OK).json({
         message: updateUserMessage(userId),
       });
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });
@@ -141,14 +142,14 @@ export const deleteUser = async (req: Request, res: Response) => {
     if (userId && findUser) {
       await usersDbService.deleteUserById(userId);
 
-      return res.status(204).send();
+      return res.status(statusCode.NO_CONTENT).send();
     }
 
-    return res.status(404).json({
+    return res.status(statusCode.NOT_FOUND).json({
       message: notFoundMessage,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(statusCode.INTERNAL_SERVER_ERROR).json({
       message: errorMessage,
       error: err.message,
     });

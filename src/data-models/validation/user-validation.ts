@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { userSchemaJoi } from '..';
+import { statusCode } from '../../constants';
 
 export const userValidation = {
   addUserValidation: async (
@@ -10,7 +11,7 @@ export const userValidation = {
     const value = await userSchemaJoi.validate(req.body);
 
     if (value.error) {
-      res.status(400).json({
+      res.status(statusCode.BAD_REQUEST).json({
         message: value.error.details[0].message,
       });
     } else {
