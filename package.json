@@ -9,7 +9,7 @@
     "fill-users-db": "ts-node -r dotenv/config src/scripts/fill-users-db.ts",
     "fill-groups-db": "ts-node -r dotenv/config src/scripts/fill-groups-db.ts",
     "lint": "eslint . --ext .ts --ignore-pattern node_modules/",
-    "test": "jest --coverage --maxWorkers=1 --forceExit"
+    "test": "jest --coverage --maxWorkers=1 --forceExit --detectOpenHandles"
   },
   "repository": {
     "type": "git",
