@@ -31,3 +31,8 @@ export const addUsersToGroupMessage = (
   groupId: string,
   userIds: string[],
 ): string => `Users with id: ${userIds} was added to group with id: ${groupId}`;
+
+// Auth
+export const forbiddenError: string = 'Forbidden Error';
+export const unauthorizedError: string = 'Unauthorized Error';
+export const incorrectPasswordOrLogin: string = 'Incorrect Password or Login';

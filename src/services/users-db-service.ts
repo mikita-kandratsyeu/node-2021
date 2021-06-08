@@ -1,7 +1,10 @@
 import { Op } from 'sequelize';
 import { groupSchema, userSchema } from '../data-models';
-import { IUser } from '../types';
+import { IUser, IUserToken } from '../types';
 import { usersDefaultLimit } from '../constants';
+import { TokenService } from './token-service';
+
+const tokenService = new TokenService();
 
 export class UsersDbService {
   getAllUsers = async () =>
@@ -65,4 +68,24 @@ export class UsersDbService {
         through: { attributes: [] },
       },
     });
+
+  login = async (login: string, password: string) => {
+    const findUser = await userSchema.findOne({
+      where: { login, password },
+    });
+
+    if (findUser) {
+      const payload: IUserToken = {
+        id: findUser.id,
+        login: findUser.login,
+      };
+
+      return {
+        'access-token': tokenService.generateAccessToken(payload),
+        'refresh-token': tokenService.generateRefreshToken(payload),
+      };
+    }
+
+    return null;
+  };
 }
