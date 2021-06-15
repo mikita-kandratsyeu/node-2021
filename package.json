@@ -1,11 +1,12 @@
 {
   "name": "node-2021",
   "version": "1.0.0",
-  "description": "Cross-country Global Mentoring Program NodeJS 2021",
+  "description": "Global Mentoring Program NodeJS 2021",
   "main": "dist/app.js",
   "scripts": {
-    "start": "tsc && cross-env NODE_ENV=production node -r dotenv/config dist/app.js",
-    "server:dev": "nodemon --watch 'src/**/*.ts' --exec ts-node -r dotenv/config src/app.ts",
+    "build": "tsc",
+    "start:prod": "tsc && node -r dotenv/config dist/src/app.js",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --exec ts-node -r dotenv/config src/app.ts",
     "fill-users-db": "ts-node -r dotenv/config src/scripts/fill-users-db.ts",
     "fill-groups-db": "ts-node -r dotenv/config src/scripts/fill-groups-db.ts",
     "lint": "eslint . --ext .ts --ignore-pattern node_modules/",

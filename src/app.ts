@@ -15,6 +15,7 @@ const port: number | string = process.env.PORT || 5000;
 app.use(morganMiddleware);
 
 // Body parser
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // CORS
