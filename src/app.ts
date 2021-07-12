@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { routerUsers, routerGroups, routerAuth } from './api';
 import { sequelize } from './data-access';
 import { groupSchema, userSchema, userGroupSchema } from './data-models';
-import { notFoundMessage, startServerMessage } from './constants';
+import { notFoundMessage, startServerMessage, statusCode } from './constants';
 import { Logger } from '../config';
 import { checkTokenAccess, morganMiddleware } from './middlewares';
 
@@ -27,12 +27,12 @@ app.use('/api/groups', checkTokenAccess, routerGroups);
 
 // Error Handling
 app.use((req: Request, res: Response): void => {
-  res.status(404).json({
+  res.status(statusCode.NOT_FOUND).json({
     message: notFoundMessage,
   });
 });
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   Logger.error(
     `Method: ${req.method} / Arguments: ${JSON.stringify(req.query)} / Error: ${
@@ -40,7 +40,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     }`,
   );
 
-  res.status(500).json({
+  res.status(statusCode.INTERNAL_SERVER_ERROR).json({
     message: err.message,
     stack: err.stack,
   });

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt, { VerifyErrors } from 'jsonwebtoken';
-import { forbiddenError, unauthorizedError } from '../constants';
+import { forbiddenError, statusCode, unauthorizedError } from '../constants';
 
 const checkTokenAccess = (req: Request, res: Response, next: NextFunction) => {
   const authHeader: any = req.headers.authorization;
@@ -13,7 +13,7 @@ const checkTokenAccess = (req: Request, res: Response, next: NextFunction) => {
       process.env.ACCESS_TOKEN_SECRET,
       (err: VerifyErrors | null, payload: any) => {
         if (err) {
-          res.status(403).json({
+          res.status(statusCode.FORBIDDEN).json({
             message: forbiddenError,
             error: err.message,
           });
@@ -24,7 +24,7 @@ const checkTokenAccess = (req: Request, res: Response, next: NextFunction) => {
       },
     );
   } else {
-    res.status(401).json({
+    res.status(statusCode.UNAUTHORIZED).json({
       message: unauthorizedError,
     });
   }
