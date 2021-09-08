@@ -9,7 +9,7 @@ import { Logger } from '../config';
 import { checkTokenAccess, morganMiddleware } from './middlewares';
 
 const app: Application = express();
-const port: number | string = process.env.PORT || 5000;
+const port: number | string = process.env.PORT ?? 5000;
 
 // Logger
 app.use(morganMiddleware);
