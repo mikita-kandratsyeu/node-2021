@@ -1,0 +1,8 @@
+node_modules
+coverage
+logs
+
+.git
+.idea
+
+Dockerfile

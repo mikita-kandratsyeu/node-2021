@@ -2,10 +2,11 @@ FROM node
 
 WORKDIR /container
 
-COPY . .
+COPY package.json /container/
+COPY package-lock.json /container/
 
 RUN npm install
 
-EXPOSE 5000
+COPY . .
 
 CMD ["npm", "run", "start"]
